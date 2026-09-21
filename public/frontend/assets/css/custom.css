@@ -1,0 +1,198 @@
+/* Make carousel prev/next arrows always visible (site-wide), instead of hover-only. */
+.slick-prev,
+.slick-next {
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55) !important;
+    text-align: center;
+    line-height: 36px;
+    z-index: 5;
+    transform: translateY(-50%) scale(1) !important;
+}
+
+.slick-prev i,
+.slick-next i {
+    font-size: 16px;
+    color: #fff;
+    line-height: 36px;
+}
+
+.slick-prev {
+    left: 10px !important;
+}
+
+.slick-next {
+    right: 10px !important;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    background: var(--colorPrimary, #f0740b) !important;
+}
+
+/* Hero carousel: the caption block (category pill + up to 4-line headline +
+   byline) is pinned to the bottom of the card and can grow tall enough to
+   push past the arrows' default vertical-center position, so the arrows end
+   up sitting on top of the pill/headline instead of framing the photo above
+   them. Move them up into the clear photo area instead. */
+.card__post-carousel .slick-prev,
+.card__post-carousel .slick-next,
+.card__post-carousel-height .slick-prev,
+.card__post-carousel-height .slick-next {
+    top: 32% !important;
+}
+
+/* Keep the header/footer logo compact — the source artwork is a tall square
+   illustration + wordmark, so cap its height instead of letting it dictate
+   the header's own height. */
+header .logo {
+    max-height: 56px !important;
+    width: auto !important;
+}
+
+header .site-brand-lockup-icon img {
+    max-height: none !important;
+    height: 78px !important;
+    width: auto !important;
+}
+
+/* Mobile header (below the lg nav breakpoint): the burger + logo sit in a
+   flex row with justify-content:space-between, and the logo's figure.mx-auto
+   only has free space on its left, so it gets shoved against the right edge
+   instead of centred. Pull the burger out of the flow and truly centre the
+   logo. */
+@media (max-width: 991.98px) {
+    .navbar > .container {
+        position: relative;
+        justify-content: center;
+    }
+
+    .navbar > .container > .offcanvas-header {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0;
+        z-index: 3;
+    }
+
+    /* The theme pins the logo <a> to a fixed 180px block and the figure's
+       mx-auto only frees space on its left — together they shove the logo
+       off-centre. Let both shrink to the artwork so mx-auto can truly
+       centre it. */
+    .navigation-wrap nav figure.mx-auto {
+        width: auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: center;
+    }
+
+    .navigation-wrap nav figure a.site-brand-lockup {
+        width: auto !important;
+        display: inline-flex !important;
+        justify-content: center;
+    }
+}
+
+.site-footer__brand-icon img {
+    max-height: none !important;
+    height: 110px !important;
+    width: auto !important;
+}
+
+/* =========================================================================
+   Editorial homepage polish
+   Real news homepages (Le Monde, NYT, Jeune Afrique...) lean on 3 things
+   this stock template didn't have: a distinct display serif for headlines
+   (kept consistent with the printed journal's Playfair Display), section
+   headers treated as a masthead-style kicker rather than a plain <h4>, and
+   a subtle image motion on hover so cards read as "alive" rather than flat.
+   ========================================================================= */
+
+/* Headlines — hero slider, cards, sidebar lists, article detail page. */
+.card__post__title h2 a,
+.card__post__title h5 a,
+.card__post__title h6 a,
+.card__post__list h5 a,
+.article__content .card__post__title h5 a,
+.wrap__article-detail-title h1 {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+    font-weight: 800 !important;
+    line-height: 1.22 !important;
+}
+
+.card__post__title h2 a {
+    font-weight: 900 !important;
+    letter-spacing: 0.2px;
+}
+
+.wrap__article-detail-title h1 {
+    font-weight: 900 !important;
+}
+
+/* Section headers ("Articles Récents", "Populaires", "Les Plus Vus"...) —
+   bigger serif, wider accent bar, more breathing room before the content. */
+.wrapper__list__article h4.border_section {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-weight: 800 !important;
+    font-size: 26px !important;
+    letter-spacing: 0.2px;
+    padding-left: 16px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: 26px !important;
+}
+
+.wrapper__list__article .border_section:before {
+    width: 6px !important;
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--colorPrimary), #ffb066) !important;
+}
+
+/* Card image motion on hover — clip the image so the zoom stays inside
+   the card instead of spilling over neighbouring content. */
+.card__post .card__post__body,
+.card__post-list .card__post__transition {
+    overflow: hidden;
+}
+
+.card__post .card__post__body img {
+    transition: transform 0.5s ease;
+}
+
+.card__post:hover .card__post__body img {
+    transform: scale(1.06);
+}
+
+.card__post-list .card__post__transition img {
+    transition: transform 0.5s ease;
+}
+
+.card__post-list:hover .card__post__transition img {
+    transform: scale(1.08);
+}
+
+/* Category pill — slightly heavier weight reads better against Playfair headlines below it. */
+.card__post__category {
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+}
+
+/* Sidebar widgets (tags, newsletter, social) — give them a card presence
+   instead of sitting flat against the page background. */
+.wrapper__list__article .blog-tags,
+.widget__form-subscribe {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.wrapper__list__article .blog-tags ul li a {
+    border-radius: 30px;
+    transition: background 0.15s, color 0.15s;
+}
